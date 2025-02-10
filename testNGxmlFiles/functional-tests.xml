@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Functional Test Suite" parallel="false">
+    <test name="Functional Tests">
+        <classes>
+            <class name="tests.functional.NavigateToCareersTest"/>
+            <class name="tests.functional.CareersPageFunctionalTest"/>
+            <class name="tests.functional.OpenPositionsPageFunctionalTest"/>
+            <class name="tests.functional.QualityAssuranceFunctionalTest"/>
+        </classes>
+    </test>
+</suite>

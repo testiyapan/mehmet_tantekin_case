@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel Test Suite" parallel="tests" thread-count="2">
+    <test name="Functional Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.functional.NavigateToCareersTest"/>
+            <class name="tests.functional.CareersPageFunctionalTest"/>
+            <class name="tests.functional.OpenPositionsPageFunctionalTest"/>
+            <class name="tests.functional.QualityAssuranceFunctionalTest"/>
+        </classes>
+    </test>
+    <test name="Smoke Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.smoke.HomePageTest"/>
+            <class name="tests.smoke.CareersPageSmokeTest"/>
+            <class name="tests.smoke.OpenPositionsPageSmokeTest"/>
+            <class name="tests.smoke.QualityAssuranceSmokeTest"/>
+        </classes>
+    </test>
+</suite>

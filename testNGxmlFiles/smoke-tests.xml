@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test Suite" parallel="false">
+    <test name="Smoke Tests">
+        <classes>
+            <class name="tests.smoke.HomePageTest"/>
+            <class name="tests.smoke.CareersPageSmokeTest"/>
+            <class name="tests.smoke.OpenPositionsPageSmokeTest"/>
+            <class name="tests.smoke.QualityAssuranceSmokeTest"/>
+        </classes>
+    </test>
+</suite>
