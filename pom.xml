@@ -51,9 +51,12 @@
         <version>3.11.0</version>
         <configuration>
           <release>21</release>
+          <encoding>UTF-8</encoding>
+          <compilerArgs>
+            <arg>--enable-preview</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
-
 
       <!-- Surefire Plugin for running tests -->
       <plugin>
