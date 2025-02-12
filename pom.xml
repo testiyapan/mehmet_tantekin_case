@@ -50,10 +50,10 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <source>21</source>  <!-- Java 21 kaynak kodu -->
-          <target>21</target>  <!-- Java 21 bytecode -->
+          <release>21</release>
         </configuration>
       </plugin>
+
 
       <!-- Surefire Plugin for running tests -->
       <plugin>
