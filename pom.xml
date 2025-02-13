@@ -70,7 +70,7 @@
             <include>**/*Test.java</include>
           </includes>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile>
+            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>
