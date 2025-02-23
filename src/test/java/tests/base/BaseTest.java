@@ -1,5 +1,7 @@
 package tests.base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -19,14 +21,16 @@ import java.lang.reflect.Method;
 import java.time.Duration;
 
 public class BaseTest {
+    protected static final Logger logger = LogManager.getLogger(BaseTest.class);
     protected WebDriver driver;
     protected WebDriverWait wait;
 
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional("chrome") String browser, Method method) {
+        logger.info("Starting test: {}", method.getName());
         if (browser == null) {
-            throw new IllegalStateException("Browser information " + browser + " is not defined in config.properties!");
+            throw new IllegalStateException(String.format("Browser information '%s' is not defined in config.properties!", browser));
         }
         driver = DriverFactory.createInstance(browser);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.getProperty("implicitWait"))));
@@ -35,8 +39,10 @@ public class BaseTest {
 
         String testUrl = ConfigReader.getProperty(method.getName() + ".url");
         if (testUrl != null) {
+            logger.info("Test URL: {}", testUrl);
             driver.get(testUrl);
         } else {
+            logger.info("Using default URL.");
             driver.get(ConfigReader.getProperty("baseUrl"));
         }
     }
@@ -44,9 +50,13 @@ public class BaseTest {
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
+            logger.error("Test failed: {}", result.getName());
             takeScreenshot(result.getName());
+        } else {
+            logger.info("Test completed successfully: {}", result.getName());
         }
         if (driver != null) {
+            logger.info("Closing WebDriver...");
             driver.quit();
         }
     }
@@ -55,9 +65,9 @@ public class BaseTest {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenshot, new File("screenshots/" + testName + ".png"));
-            System.out.println("Screenshot taken: " + testName);
+            logger.info("Screenshot taken: {}", testName);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error while taking screenshot", e);
         }
     }
 }
