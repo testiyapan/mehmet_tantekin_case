@@ -12,5 +12,4 @@ public interface IHomePage {
     void clickLoginButtonAndSwitchToNewTab();
 
     void navigateToCareers();
-    // HomePage sınıfına ait metodları burada tanımlayabilirsiniz.
 }

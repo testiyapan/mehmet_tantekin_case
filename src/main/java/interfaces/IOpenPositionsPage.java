@@ -24,5 +24,4 @@ public interface IOpenPositionsPage {
     void clickFirstViewRoleButton();
 
     void switchToNewTabAndVerifyUrlContains(String expectedUrlPart);
-    // OpenPositionsPage sınıfına ait metodları burada tanımlayabilirsiniz.
 }
