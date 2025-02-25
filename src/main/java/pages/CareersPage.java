@@ -4,16 +4,18 @@ import locators.CareersXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import expecteds.CareersExpected;
+import interfaces.ICareersPage;
 
 
 import java.util.List;
 
-public class CareersPage extends PageObject {
+public class CareersPage extends PageObject implements ICareersPage {
 
     public CareersPage(WebDriver driver) {
         super(driver);
     }
 
+    @Override
     public void checkAndClickSeeAllTeamsButton() {
         if (isElementExist(CareersXPath.seeAllTeamsButton)) {
             System.out.println("'See all teams' button found. Clicking...");
@@ -24,6 +26,7 @@ public class CareersPage extends PageObject {
         }
     }
 
+    @Override
     public boolean verifyTeamSectionsPresent(List<String> expectedTeams) {
         List<String> actualTeams = getTextList(CareersXPath.teamTitles);
 
@@ -38,6 +41,7 @@ public class CareersPage extends PageObject {
         return true;
     }
 
+    @Override
     public List<WebElement> getTeamElements() {
         List<WebElement> teamElements = driver.findElements(CareersXPath.teamTitles);
 
@@ -47,18 +51,21 @@ public class CareersPage extends PageObject {
         return teamElements;
     }
 
+    @Override
     public void scrollToAndClickSeeAllTeams() {
         scrollUntilElementVisible(CareersXPath.seeAllTeamsButton, 10);
         clickWithJS(CareersXPath.seeAllTeamsButton);
         System.out.println("See all teams' button found.");
     }
 
+    @Override
     public void scrollToAndClickQualityAssuranceSection() {
         scrollUntilElementVisible(CareersXPath.qualityAssuranceSection, 10);
         clickWithJS(CareersXPath.qualityAssuranceSection);
         System.out.println("Clicked on the Quality Assurance section.");
     }
 
+    @Override
     public boolean isPageTitleContainsExpected() {
         String pageTitle = getPageTitle();
         return pageTitle.contains(CareersExpected.EXPECTED_TITLE);

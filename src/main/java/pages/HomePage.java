@@ -1,5 +1,6 @@
 package pages;
 
+import interfaces.IHomePage;
 import locators.HomeXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,34 +8,40 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class HomePage extends PageObject {
+public class HomePage extends PageObject implements IHomePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
+    @Override
     public boolean isHomePageOpened() {
         return getPageTitle().contains("Insider");
     }
 
+    @Override
     public String getHomePageTitle() {
         return getPageTitle();
     }
 
+    @Override
     public boolean isNavigationMenuDisplayed() {
         return isElementVisible(HomeXPath.navigationMenu);
     }
 
+    @Override
     public void clickLoginButton() {
         waitAndClick(HomeXPath.loginButton);
     }
 
+    @Override
     public void clickLoginButtonAndSwitchToNewTab() {
         clickElementByXpath(HomeXPath.loginButton);
         switchToNewTab();
         waitForUrlToContain("https://inone.useinsider.com/login", 10);
     }
 
+    @Override
     public void navigateToCareers() {
         clickElementByXpath(HomeXPath.companyMenu);
         waitUntilVisible(HomeXPath.dropdownMenuOptions);
